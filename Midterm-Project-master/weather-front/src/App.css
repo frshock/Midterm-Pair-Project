@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+
+.chart-container{
+  width: 100%;
+  height: 500px;
+  background-color:#ffffff;
+  margin-top: 20px;
+  position: relative;
+  border:1px solid gray;
+  border-radius: 10px;
+}
+
+.bar{
+  background-color:lightgray;
+  position: absolute;
+  height: 20px;
+  border-radius: 40px;
+  bottom: 250px;
+  z-index: 99999;
+}
+
+.bar:hover{
+  background-color: red;
+}
+
+.label {
+  color: black;
+  position: absolute;
+  top: -15px;
+  left: -5px;
+  width: 100%;
+  text-align: center;
+}
+
+.chart-divider{
+  position: absolute;
+  top: 250px;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  border: 1px solid black;
+}
+
+.testZero {
+  position: relative;
+  right: 600px;
+}
+
+.city-details{
+  position: relative;
+  text-align: left;
+  left: 200px;
+  color:darkgray
+
+}
+
+.header{
+  background-color:#FFF774;
+  width: 100%;
+  height: 90px;
+  padding: 5px;
+  text-align: center;
+}
