@@ -1,6 +1,5 @@
 const express = require('express');
 const request = require('request');
-const axios = require('axios');
 const app = express();
 const PORT = 8888;
 
@@ -35,7 +34,7 @@ app.get('/', (req, res) => {
 })
 
 
-app.post('/:city', (req, res) => {
+app.post('/:city', (req, res,units) => {
     getWeatherData(req.params.city,res,req.params.units);
 })
 
