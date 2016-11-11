@@ -8,13 +8,22 @@
   position: relative;
   border:1px solid gray;
   border-radius: 20px;
+<<<<<<< HEAD
+  box-shadow: 10px 10px lightgray;
+
+}
+=======
   box-shadow: 0 10px 0 0 lightgray;
 }
 
+>>>>>>> 83c18d25739e3d7e7f2344b267eff467025a13bb
 .bar{
-  background-color: #189;
   position: absolute;
+<<<<<<< HEAD
+  height: 15px;
+=======
   height: 25px;
+>>>>>>> 83c18d25739e3d7e7f2344b267eff467025a13bb
   border-radius: 40px;
   bottom: 250px;
   z-index: 99999;

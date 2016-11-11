@@ -18,11 +18,12 @@ function getWeatherData(city,res,unit){
             let test = JSON.parse(body);
             let parsedObj = [];
             for(let i=0; i<test.list.length; i++){
-
-                parsedObj.push(test.list[i].main); //Pushing the temperature data into the array we send back.
-                parsedObj.push(test.list[i].weather[0]); //Pushing the UNIX time to the array we send back.
+                parsedObj.push({
+                    temp: test.list[i].main.temp,
+                    condition: test.list[i].weather[0].main,
+                    icon: test.list[i].weather[0].icon
+                }); //Pushing the weather obj to the array we send back.
             }
-            console.log(JSON.stringify(parsedObj));
             res.json(parsedObj); //Sending back a JSON of the array we just populated.
         }
     })
