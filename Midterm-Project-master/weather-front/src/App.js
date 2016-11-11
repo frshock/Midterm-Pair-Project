@@ -7,38 +7,29 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      weatherList: [],
+      weatherList: [{temp: 20,
+                     condition: 'Clear',
+                     icon: '10d'
+    }],
       submissionText: '',
-      currentTime: [],
       currentCity: 'Toronto',
-      iconList: []
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit(e){
-    e.preventDefault();
-    const parsedArray = []; //This holds the temperature response this time we're making a post request to update the data.
-    const forecastArray = [];
-    const iconList = [];
+    e.preventDefault(); //This holds the temperature response this time we're making a post request to update the data.
+    const weatherArray = [];
     axios.post('http://localhost:8888/'+this.state.submissionText).then((res) => {
       for(let i=0; i<res.data.length; i++){
-          if(i%2===0){
-            parsedArray.push(res.data[i].temp) //Pushing all the temperatures into a temp array.
-          }
-
-          if(i%2 === 1){
-            forecastArray.push(res.data[i].main);
-            iconList.push(res.data[i].icon);
-          }
+            weatherArray.push(res.data[i]); //Pushing all the temperatures into a temp array.
       }
+      console.log(weatherArray)
     }).then((res)=>
       this.setState({
-        weatherList: parsedArray, //resetting our state to reflect the API response
-          currentCity: this.state.submissionText,
-        currentTime: forecastArray[0],
-        iconList: iconList[0]
+        weatherList: weatherArray,
+        currentCity: this.state.submissionText
       }))
   }
 
@@ -52,32 +43,22 @@ class App extends Component {
  
 
   componentDidMount(){
-    const forecastArray = [];
-    const parsedArray = []; //This holds the temperature response
-    const iconList = [];
+    const weatherArray = [];
     axios.get('http://localhost:8888').then((res) => {
       for(let i=0; i<res.data.length; i++){
-          if(i%2===0){
-            parsedArray.push(res.data[i].temp); //Pushing all the temperatures into a temp array.
-          }
-          if(i%2 === 1){
-            forecastArray.push(res.data[i].main);
-            iconList.push(res.data[i].icon);
-          }
+            weatherArray.push(res.data[i]); //Pushing all the temperatures into a temp array.
       }
     }).then((res)=>
       this.setState({
-         //resetting our state to reflect the API response
-        currentTime: forecastArray[0],
-        weatherList: parsedArray, //resetting our state to reflect the API response
-        iconList: iconList[0]
+        weatherList: weatherArray  //resetting our state to reflect the API response
       }))
   }
     //In our render we're mapping the current state of the weatherList to our bars.
 
   render() {
     const temp = this.state.weatherList;    
-    let iconTemp = this.state.iconList;
+    let iconTemp = this.state.weatherList[0].icon;
+    let currentCondition = this.state.weatherList[0].condition;
     let currentIcon = "http://openweathermap.org/img/w/"+{iconTemp}+".png";
     
     return (
@@ -86,7 +67,7 @@ class App extends Component {
       <div className="header"><h1>WEATHER FORECAST</h1></div>
       <div className="city-details">
       <h2 >{this.state.currentCity.toUpperCase()}</h2>
-      <h3> Expect {this.state.currentTime}</h3><img src={"http://openweathermap.org/img/w/"+iconTemp+".png"} /></div>
+      <h3> Expect {this.state.weatherList[0].condition} </h3><img src={"http://openweathermap.org/img/w/"+iconTemp+".png"} /></div>
 
         <form className="search" type="input" onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Search by City" onChange={this.handleChange} />
@@ -98,14 +79,15 @@ class App extends Component {
             <span className="testZero">0C</span>
             {temp.map((weather, i) => {
                 let style = {
-                  border: '1px solid #000000',
-                  bottom: weather*5,
-                  width: ((1140/temp.length)-15),
-                  left: i*(1140/temp.length)
+
+                  bottom: weather.temp*5,
+                  width: ((1140/temp.length)-5),
+                  left: i*(1140/temp.length),
+                  backgroundImage: 'url('+'http://openweathermap.org/img/w/'+weather.icon+'.png'+')'
                 }
                 return(
                   <div className="bar" style={style} >
-                      <span className="label">{weather}</span>
+                      <span className="label">{weather.temp}</span>
                   </div>
                 )
 
