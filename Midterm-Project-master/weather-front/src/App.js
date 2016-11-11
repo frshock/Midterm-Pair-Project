@@ -88,7 +88,7 @@ class App extends Component {
       <h2 >{this.state.currentCity.toUpperCase()}</h2>
       <h3> Expect {this.state.currentTime}</h3><img src={"http://openweathermap.org/img/w/"+iconTemp+".png"} /></div>
 
-        <form type="input" onSubmit={this.handleSubmit}>
+        <form className="search" type="input" onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Search by City" onChange={this.handleChange} />
         </form>
 
@@ -100,12 +100,12 @@ class App extends Component {
                 let style = {
                   border: '1px solid #000000',
                   bottom: weather*5,
-                  width: ((1140/temp.length)-7),
+                  width: ((1140/temp.length)-15),
                   left: i*(1140/temp.length)
                 }
                 return(
                   <div className="bar" style={style} >
-                      <span className="label">{weather}C</span>
+                      <span className="label">{weather}</span>
                   </div>
                 )
 

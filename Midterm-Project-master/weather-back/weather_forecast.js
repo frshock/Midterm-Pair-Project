@@ -10,13 +10,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 const APIKEY = "8bf7a26998ebdf6bf75544a7218a45f5";
+const url = "http://api.openweathermap.org/data/2.5/forecast?APPID=" + APIKEY;
 
-app.get('/', (req, res) => {
-    let city = 'toronto';
-    const url = "http://api.openweathermap.org/data/2.5/forecast?q="+ city +"&units=metric&APPID=" + APIKEY;
-    request(url, (err, response, body)=> {
+function getWeatherData(city,res,unit){
+    request(url+"&q="+city+'&units='+(unit?unit:'metric'), (err, response, body)=> {
         if (!err && response.statusCode === 200){
             let test = JSON.parse(body);
             let parsedObj = [];
@@ -25,27 +23,20 @@ app.get('/', (req, res) => {
                 parsedObj.push(test.list[i].main); //Pushing the temperature data into the array we send back.
                 parsedObj.push(test.list[i].weather[0]); //Pushing the UNIX time to the array we send back.
             }
+            console.log(JSON.stringify(parsedObj));
             res.json(parsedObj); //Sending back a JSON of the array we just populated.
         }
     })
+}
+
+
+app.get('/', (req, res) => {
+    getWeatherData('toronto',res);
 })
 
 
 app.post('/:city', (req, res) => {
-    let city = req.params.city; // this one's for updating the data to whatever the user wants.
-    const url = "http://api.openweathermap.org/data/2.5/forecast?q="+ city +"&units=metric&APPID=" + APIKEY;
-    request(url, (err, response, body)=> {
-        if (!err && response.statusCode === 200){
-            let test = JSON.parse(body);
-            let parsedObj = [];
-            for(let i=0; i<test.list.length; i++){
-
-                parsedObj.push(test.list[i].main); //Pushing the temperature data into the array we send back.
-                parsedObj.push(test.list[i].weather[0]); //Pushing the UNIX time to the array we send back.
-            }
-            res.json(parsedObj); //Sending back a JSON of the array we just populated.
-        }
-    })
+    getWeatherData(req.params.city,res,req.params.units);
 })
 
 app.listen(PORT, () => {
