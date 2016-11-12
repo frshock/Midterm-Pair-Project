@@ -8,17 +8,18 @@
   position: relative;
   border:1px solid gray;
   border-radius: 20px;
-  box-shadow: 0 10px 0 0 lightgray;
+  background-color: #FFFAE4;
 }
 
 .bar{
-  background-color: #189;
+  
   position: absolute;
   height: 25px;
   border-radius: 40px;
   bottom: 250px;
   z-index: 99999;
   background-size: cover;
+
 }
 
 .bar:hover{
@@ -36,7 +37,7 @@
 
 .chart-divider{
   position: absolute;
-  top: 250px;
+  top: 235px;
   width: 100%;
   height: 1px;
   background-color: black;
@@ -46,13 +47,15 @@
 .testZero {
   position: relative;
   right: 600px;
+  color:#FFFAE4;
+  font-size: 20px;
 }
 
 .city-details{
   position: relative;
   padding-top: 100px;
   text-align: left;
-  left: 200px;
+  left: 100px;
   color:#444;
 }
 
@@ -60,16 +63,15 @@
   position: absolute;
   width: 100%;
   height: 90px;
-  padding: 5px;
-  text-align: left;
-  left:200px;
-  color: #444;
+  text-align: center;
+  color:#FFFAE4;
+  background-color: #26393D;
 }
 
 .search{
   position: relative;
-  text-align: right;
-  right: 200px;
+  text-align: center;
+  
 }
 
 input[type=text] {
@@ -80,4 +82,20 @@ input[type=text] {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+.container{
+  background-color: #F7E967;
+}
+.mainicon{
+width:100px;
+height:100px;
+}
+
+.detail-weather{
+ position: absolute;
+  text-align: right;
+  right: 200px;
+  top:125px;
+  color:#444; 
+  font-size: 17px;
 }

@@ -21,7 +21,12 @@ function getWeatherData(city,res,unit){
                 parsedObj.push({
                     temp: test.list[i].main.temp,
                     condition: test.list[i].weather[0].main,
-                    icon: test.list[i].weather[0].icon
+                    icon: test.list[i].weather[0].icon,
+                    maxTemp:test.list[i].main.temp_max,
+                    minTemp: test.list[i].main.temp_min,
+                   humidity: test.list[i].main.humidity,
+                   windSpeed: test.list[i].wind.speed,
+                   currentTime:test.list[i].dt_txt
                 }); //Pushing the weather obj to the array we send back.
             }
             res.json(parsedObj); //Sending back a JSON of the array we just populated.
