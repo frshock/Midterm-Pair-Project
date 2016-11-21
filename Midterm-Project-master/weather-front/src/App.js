@@ -137,3 +137,40 @@ class App extends Component {
 }
 
 export default App;
+
+// ** R E V I E W ** —>
+
+// I like your idea of displaying an extended, detailed forecast, rather than just one temperature 
+// for one day as you often see. I like how you used the API icons to see weather conditions at a glance, 
+// as well as the hover effect over specific times. I actually used this app a few times to get a sense 
+// of what the weekend would bring. :)
+
+// Overall your code is very straightforward and well organized. This is a good core project from which you
+// could build on if you wanted. Functionally there is little to improve on, though there are a few minor 
+// things I wanted to point out to improve your understanding:
+
+
+// In componentDidMount and handleSubmit(), you have two .then() statements chained together. However, for loops 
+// run synchronously, so you only need one .then(). Unless you are performing aysnchronous HTTP or database 
+// requests inside the body of the for loop, you do not need a promise to work with a for loop. 
+// If you remove one .then() statement, the function will work exactly the same.
+
+
+// One feature that would have been good to see would be clear markings where a new day starts.
+// This could be accomplished by finding if the currentTime property contains "00:00:00".
+
+
+// The indentation/formatting overall is very strong, with a few things that could be fixed.
+// In handleClick, the object keys in setState should be on separate lines for readability; i.e. :
+
+//    this.setState({currentMax: this.state.weatherList[i].maxTemp, 
+//                   currentMin: this.state.weatherList[i].minTemp, 
+//                   currentHum: this.state.weatherList[i].humidity, ... etc.
+
+// As well the <h3>, <img>, and </div> tags near line 94 could be separated a little better.
+
+// Finally your CSS values are all measured using pixels. However using PX causes many headaches when trying
+// to format responsiveness for an app. I definitely recommend reading up on relative CSS values such
+// as %, vh, vw, and rem.
+
+// -- Dan
